@@ -16,10 +16,10 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("success");
+      navigate("/chat");
     } catch (err) {
       alert(err);
     }
-    navigate("/chat");
   };
 
   return (

@@ -9,19 +9,21 @@ function SearchUser({ onSelectUser }) {
 
   const handleSearch = async () => {
     const searchTerm = inputValue.trim();
-    if (!searchTerm) return;
+    if (!searchTerm) {
+      setUsers([]); // Clear results if input is empty
+      return;
+    }
 
     try {
-      console.log("Searching for:", searchTerm);
-
       const usersRef = collection(db, "user");
       const q = query(usersRef, where("userName", "==", searchTerm));
-
       const querySnapshot = await getDocs(q);
-      const searchResults = querySnapshot.docs.map((doc) => doc.data());
+      const searchResults = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id, // Include the document ID for identification
+      }));
+      setInputValue("");
       setUsers(searchResults);
-
-      console.log("Search results:", searchResults);
     } catch (err) {
       console.error("Error searching for user: ", err);
     }
@@ -47,9 +49,15 @@ function SearchUser({ onSelectUser }) {
         {users.length === 0 ? (
           <p>No users found.</p>
         ) : (
-          users.map((user, index) => (
-            <div key={index}>
-              <h3 onClick={() => onSelectUser(user)}>{user.userName}</h3>
+          users.map((user) => (
+            <div className="search-bag" key={user.id}>
+              <h3
+                className="userli"
+                onClick={() => onSelectUser(user)} // Pass selected user
+                style={{ cursor: "pointer" }} // Make it clear it's clickable
+              >
+                {user.userName}
+              </h3>
               <p>{user.email}</p>
             </div>
           ))

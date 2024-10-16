@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable */ 
+
 import {
   BrowserRouter as Router,
   Route,
@@ -13,14 +14,13 @@ import Chat from "./Chat.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import { auth } from "./config/Firebase.js";
 import "./App.css";
-
 import { FiLogOut } from "react-icons/fi";
+import Username from "./auth/Username.jsx";
 
 function App() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [user, setUser] = useState(null);
 
-  // Track authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -28,7 +28,6 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // Protective Route Component
   const PrivateRoute = ({ children }) => {
     return user ? children : <Navigate to="/login" />;
   };
@@ -40,6 +39,7 @@ function App() {
       alert(err);
     }
   };
+
   return (
     <Router>
       <div className="home">
@@ -64,6 +64,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/username" element={<Username />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/login" />} />
