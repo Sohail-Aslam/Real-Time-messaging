@@ -82,15 +82,10 @@ function Username() {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       {/* Username popup */}
       <div className="usernamePopup">
-        <h1
-          style={{ marginLeft: "73px", marginBottom: "40px" }}
-          className="comment"
-        >
-          What's your name?
-        </h1>
+        <h1 className="comment">What's your name?</h1>
         <p style={{ marginLeft: "73px", marginBottom: "120px" }}>
           Adding your name and profile photo helps your teammates recognize and{" "}
           <br />

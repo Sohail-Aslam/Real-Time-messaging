@@ -5,10 +5,8 @@ import { db } from "../config/Firebase.js";
 import SearchUser from "../components/Search.jsx";
 
 function Sidebar({ onSelectUser }) {
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [userList, setUserList] = useState([]);
-
-  const usersRef = collection(db, "user");
 
   useEffect(() => {
     const fetchUsers = async () => {

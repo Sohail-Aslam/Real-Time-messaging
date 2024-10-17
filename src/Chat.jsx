@@ -102,9 +102,7 @@ function Chat({ selectedUser, fetchUsers }) {
   return (
     <>
       <div className="chat-header">
-        <SearchUser className="searchitem" />
-
-        <h4 style={{marginBottom:'0'}} className="chsrt">
+        <h4 style={{ marginBottom: "0" }} className="chsrt">
           Chat with {selectedUser?.userName || "Unknown User"}
         </h4>
       </div>
